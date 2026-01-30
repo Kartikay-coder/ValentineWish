@@ -8,7 +8,6 @@
     <link rel="shortcut icon" type="image/png" href="./img/heart.svg" />
     <link rel="stylesheet" href="style/style.css" />
     <style>
-        /* This makes the heart pulse */
         @keyframes heartbeat {
             0% { transform: scale(1); }
             15% { transform: scale(1.3); }
@@ -16,8 +15,6 @@
             45% { transform: scale(1.15); }
             60% { transform: scale(1); }
         }
-        /* Keep container hidden until click */
-        .container { opacity: 0; transition: opacity 0.5s; }
     </style>
 </head>
 
@@ -30,7 +27,7 @@
         <p style="color: #ff4d6d; font-family: 'Arial', sans-serif;">(Tap the heart)</p>
     </div>
 
-    <div class="container" id="mainContainer">
+    <div class="container">
         <div class="one">
             <h1 class="one">Hey <span id="name">xyz</span></h1>
             <p class="two" id="greetingText">I really like your name btw!</p>
@@ -82,36 +79,19 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
-    
     <script>
-        // Control Logic
         document.getElementById('click-me-overlay').addEventListener('click', function() {
-            // 1. Play Music
             var audio = document.getElementById('valentineMusic');
             audio.play();
-
-            // 2. Hide Overlay and Show Content
             this.style.opacity = '0';
-            document.getElementById('mainContainer').style.opacity = '1';
-            
             setTimeout(() => {
                 this.style.display = 'none';
-                // 3. Start the actual animation script
-                startAnimation(); 
             }, 500);
         });
     </script>
 
-    <script type="text/babel">
-        // This function will be called only after the heart is clicked
-        window.startAnimation = () => {
-            const script = document.createElement('script');
-            script.src = 'script/main.js';
-            script.type = 'text/babel';
-            document.body.appendChild(script);
-        };
-    </script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <script type="text/babel" src="script/main.js"></script>
 </body>
 </html>
