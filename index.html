@@ -129,25 +129,31 @@
         <p class="last-smile">:)</p>
       </div>
     </div>
-    <audio src="img/dd.mp3" id="valentineMusic" loop autoplay></audio>
+   <audio src="img/dd.mp3" id="valentineMusic" loop></audio>
 
 <script>
   const audio = document.getElementById('valentineMusic');
 
-  // Function to start music
-  function playMusic() {
-    audio.play().catch(error => {
-      console.log("Autoplay blocked. Waiting for user interaction.");
+  function attemptPlay() {
+    audio.play().then(() => {
+      // If it works, we stop trying
+      console.log("Music started!");
+      clearInterval(playInterval);
+    }).catch(() => {
+      // If it fails (blocked), we just wait for the next attempt
+      console.log("Autoplay blocked... waiting for interaction.");
     });
   }
 
-  // Try to play immediately on load
-  window.addEventListener('load', playMusic);
+  // This tries to play the song every 500ms (0.5 seconds)
+  const playInterval = setInterval(attemptPlay, 500);
 
-  // If blocked, play on the very first click or key press anywhere on the laptop
-  document.addEventListener('click', playMusic, { once: true });
-  document.addEventListener('keydown', playMusic, { once: true });
+  // As a backup, it triggers the moment they click or press any key
+  document.addEventListener('click', attemptPlay, { once: true });
+  document.addEventListener('keydown', attemptPlay, { once: true });
+  document.addEventListener('mousemove', attemptPlay, { once: true });
 </script>
+ 
   </body>
 
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
