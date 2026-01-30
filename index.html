@@ -13,6 +13,21 @@
   </head>
 
   <body>
+    <div id="click-me-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffcad4; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000; cursor: pointer; transition: 0.5s;">
+  <div style="font-size: 80px; animation: heartbeat 1.2s infinite;">❤️</div>
+  <h2 style="color: #ff4d6d; font-family: 'Arial', sans-serif; margin-top: 20px;">Open your Valentine's surprise...</h2>
+  <p style="color: #ff4d6d; font-family: 'Arial', sans-serif;">(Tap the heart)</p>
+</div>
+
+<style>
+  @keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+  }
+</style>
     <div class="container">
       <div class="one">
         <h1 class="one">
@@ -129,30 +144,20 @@
         <p class="last-smile">:)</p>
       </div>
     </div>
-   <audio src="img/dd.mp3" id="valentineMusic" loop></audio>
+  <script>
+  document.getElementById('click-me-overlay').addEventListener('click', function() {
+    // 1. Play the music
+    var audio = document.getElementById('valentineMusic');
+    audio.play();
 
-<script>
-  const audio = document.getElementById('valentineMusic');
-
-  function attemptPlay() {
-    audio.play().then(() => {
-      // If it works, we stop trying
-      console.log("Music started!");
-      clearInterval(playInterval);
-    }).catch(() => {
-      // If it fails (blocked), we just wait for the next attempt
-      console.log("Autoplay blocked... waiting for interaction.");
-    });
-  }
-
-  // This tries to play the song every 500ms (0.5 seconds)
-  const playInterval = setInterval(attemptPlay, 500);
-
-  // As a backup, it triggers the moment they click or press any key
-  document.addEventListener('click', attemptPlay, { once: true });
-  document.addEventListener('keydown', attemptPlay, { once: true });
-  document.addEventListener('mousemove', attemptPlay, { once: true });
+    // 2. Hide the pink overlay
+    this.style.opacity = '0';
+    setTimeout(() => {
+      this.style.display = 'none';
+    }, 500);
+  });
 </script>
+
  
   </body>
 
