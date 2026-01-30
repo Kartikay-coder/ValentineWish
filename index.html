@@ -129,6 +129,16 @@
         <p class="last-smile">:)</p>
       </div>
     </div>
+    <audio src="img/dd.mp3" id="valentineMusic" loop></audio>
+
+<script>
+  // This starts the music when the user first taps the screen 
+  // (Required because browsers block automatic music).
+  document.addEventListener('click', function() {
+    var audio = document.getElementById('valentineMusic');
+    audio.play();
+  }, { once: true });
+</script>
   </body>
 
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
