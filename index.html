@@ -129,15 +129,24 @@
         <p class="last-smile">:)</p>
       </div>
     </div>
-    <audio src="img/dd.mp3" id="valentineMusic" loop></audio>
+    <audio src="img/dd.mp3" id="valentineMusic" loop autoplay></audio>
 
 <script>
-  // This starts the music when the user first taps the screen 
-  // (Required because browsers block automatic music).
-  document.addEventListener('click', function() {
-    var audio = document.getElementById('valentineMusic');
-    audio.play();
-  }, { once: true });
+  const audio = document.getElementById('valentineMusic');
+
+  // Function to start music
+  function playMusic() {
+    audio.play().catch(error => {
+      console.log("Autoplay blocked. Waiting for user interaction.");
+    });
+  }
+
+  // Try to play immediately on load
+  window.addEventListener('load', playMusic);
+
+  // If blocked, play on the very first click or key press anywhere on the laptop
+  document.addEventListener('click', playMusic, { once: true });
+  document.addEventListener('keydown', playMusic, { once: true });
 </script>
   </body>
 
